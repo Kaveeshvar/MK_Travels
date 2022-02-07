@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="style3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>Car-Die game</title>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="header">
+            <a href="#default" class="logo"><img src="logo(1).png"></a>
+            <div class="header-right">
+                <a href="lhome.html">Home</a>
+                <a href="lBuy.html">Book Now</a>
+                <a class="active"  href="game.html">Game</a>
+                <a href="#login">logged in</a>
+            </div>
+        </div>
+    </div>
+        <center>
+            <h1 style="color:red;">Welcome to The Dice Car Game !!!<h1>
+
+                    <div id='score'></div>
+                    
+                    <img class="die" id="die" src="gameimg/1.jpg" width="50" height="50"><br>
+                    <button onclick="AniDice()">Roll Dice</button>
+                    <button onclick="stopDice()">Stop</button>
+                    <br>
+                    <div class="grid-container">
+                        <div id="animate"><img src="gameimg/car1.png" style="width: 60px; height: 60px;"></div>
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                        <div class="grid-item">4</div>
+                        <div class="grid-item">5</div>
+                        <div class="grid-item">6</div>
+                        <div class="grid-item">7</div>
+                        <div class="grid-item">8</div>
+                        <div class="grid-item">9</div>
+                        <div class="grid-item">10</div>
+                        <div class="grid-item">11</div>
+                        <div class="grid-item">12</div>
+                        <div class="grid-item">13</div>
+                        <div class="grid-item">14</div>
+                        <div class="grid-item">15</div>
+                        <div class="grid-item">16</div>
+                        <div class="grid-item">17</div>
+                        <div class="grid-item">End</div>
+                    </div>
+                    <br><div id="body1"></div>
+        </center>
+        <script>
+            var pos = 0;
+            var score = 0;
+            var currentpos = 1;
+            function myMove(x) {
+                var nextBox = pos + (72 * x);
+                var elem = document.getElementById("animate");
+                var id = setInterval(frame, 5);
+                function frame() {
+                    if (pos >= nextBox) {
+                        clearInterval(id);
+                    }
+                    else {
+                        pos += 1;
+                        elem.style.left = pos + "px";
+                    }
+                }
+            }
+            var dice2;
+            function AniDice() {
+                myVar = setInterval(rolldice, 20)
+            }
+            function rolldice() {
+                var ranNum = Math.floor(1 + Math.random() * 6);
+                var dice = document.getElementById("die");
+                dice.src = "gameimg/" + ranNum + ".jpg";
+                dice2 = ranNum;
+            }
+            function stopDice() {
+                clearInterval(myVar);
+                if ((currentpos + dice2) <= 18) {
+                    myMove(dice2);
+                    alert("Dice Shows : " + dice2);
+                    currentpos += dice2;
+                    score += 100 * dice2;
+                    document.getElementById("score").innerHTML = "Player 1 Score: " + score;
+                }
+                if ((currentpos + dice2) == 18) {
+                    alert("Game over");
+                }
+            }
+        </script>
+        
+</body>
+
+</html>
